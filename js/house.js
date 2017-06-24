@@ -38,7 +38,9 @@ var cfg = {
   ctx.transform(1, 0, 0, -1, 0, 0);
 })();
 
-// 初始化平面直角坐标系
+/**
+ * 初始化平面直角坐标系
+ */
 function initGrid() {
   ctx.beginPath();
   // 水平 X 轴
@@ -471,6 +473,9 @@ with (data) {
 
 console.log("缩放比例为：%f", data.percent);
 
+/**
+ * 绘制房间图
+ */
 function drawHouse() {
   if (!data.initializedGrid) {
     ctx.translate(cfg.offsetX, cfg.offsetY);
@@ -499,6 +504,19 @@ function lineTo(offsetX, offsetY, percent) {
   ctx.lineTo(cursorX, cursorY);
 }
 
+/**
+ * 使用这个方法来绘制自己的多边形
+ *
+ * @param {Array.<Number>} part
+ * 前 3 个参数为一组，
+ * 分别代表绘制起始 x，起始 y，是否虚线（1 代表实线，0 代表虚线）；
+ * 后面每 3 个参数为一组，
+ * 分别代表水平平移距离 x，竖直平移距离 y，是否绘制（1 代表绘制，0 代表不绘制）。
+ *
+ * @param {Boolean} scale
+ * true 表示按照实际尺寸来缩放并绘制；
+ * false 表示不缩放，按照坐标系尺寸来绘制。
+ */
 function drawGeometricFigure(part, scale) {
   ctx.save();
   ctx.beginPath();
